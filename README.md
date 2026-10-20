@@ -2,7 +2,7 @@ teknologi yang digunakan
 - python ini berbeda folder project, jadi saya upload dbt nya
 - sql server
 - potsgresql
-- power bi
+- power bi paralel on progress
 
 general end to end project
 
@@ -15,3 +15,9 @@ general end to end project
 7. gold, ini ada pembuatan master dari data -data tersebut.
 8. hasil table gold digunakan sebagai source dashboard power bi
 9. gold, digunakan juga sebagai bahan untuk API python
+
+
+note AI:
+python script APi, dummy data
+konsep atau struktur folder penggunaan dbt.
+power BI AI instruktor cara penggunaannya.
