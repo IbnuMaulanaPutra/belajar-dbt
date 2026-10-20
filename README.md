@@ -18,6 +18,18 @@ general end to end project
 
 
 note AI:
+secara general semua tools ini baru saya pakai dan pelajari, seperti pertemuan awal,
+secara general project saya sudah memahami end to end nya, dan secara implementasi masih di bantu AI
+
 python script APi, dummy data
 konsep atau struktur folder penggunaan dbt.
 power BI AI instruktor cara penggunaannya.
+penggunaan git,
+
+untuk kedepannya mungkin ada banyak tambahan dri kondisi saat ini:
+
+untuk analytic yg lebih kompleks ini terbatar dari sumber datanya,
+saya juga tidak membuat master brand, agar misalnya bisa lebih kompleks,
+ketika ingin membuat sebuah master data yang lebih rapih,
+jadi nantinya bisa ada table barang per category per brand dll
+bisa per category per platform dan per storname, jadi bisa lihat toko tersebut berjualan di category product apa misalnya.
