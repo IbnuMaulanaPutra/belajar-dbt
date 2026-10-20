@@ -16,8 +16,46 @@ general end to end project
 8. hasil table gold digunakan sebagai source dashboard power bi
 9. gold, digunakan juga sebagai bahan untuk API python
 
+# lineage dbt
+raw.product_crawling
+        |
+        v
+raw.src_product_crawling
+        |
+        v
+stg_product_crawling
+        |
+        v
+int_product_matching_base
+        |
+        v
+int_product_matching_fuzzy_candidates
+        |
+        v
+int_product_matching_resolved
+        |
+        +----------------------------+
+        |              |             |
+        v              v             v
+dim_product_master  fct_product_price_daily
+dim_platform        ^
+dim_date            |
+                    |
+                    +-- menggunakan hasil
+                        product matching
 
-note AI:
+fct_product_price_daily
+        |
+        +---------------------------+
+        |                           |
+        v                           v
+fct_price_recommendation    Reporting Models
+                            |
+                            +-- a_rpt_price_index_by_platform
+                            +-- a_rpt_discount_analysis
+                            +-- a_rpt_price_dispersion
+                            +-- a_rpt_price_change_patterns
+# note AI:
 secara general semua tools ini baru saya pakai dan pelajari, seperti pertemuan awal,
 secara general project saya sudah memahami end to end nya, dan secara implementasi masih di bantu AI
 
@@ -26,7 +64,8 @@ konsep atau struktur folder penggunaan dbt.
 power BI AI instruktor cara penggunaannya.
 penggunaan git,
 
-untuk kedepannya mungkin ada banyak tambahan dri kondisi saat ini:
+
+# untuk kedepannya mungkin ada banyak tambahan dri kondisi saat ini:
 
 untuk analytic yg lebih kompleks ini terbatar dari sumber datanya,
 saya juga tidak membuat master brand, agar misalnya bisa lebih kompleks,
