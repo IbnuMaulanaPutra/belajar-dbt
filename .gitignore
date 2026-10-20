@@ -1,6 +1,19 @@
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
 
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+
+# dbt artifacts
 target/
 dbt_packages/
 logs/
-dbt_project.yml
-package-lock.yml
+
+# Virtual environments
+venv/
+venv_dbt/
+.venv/
