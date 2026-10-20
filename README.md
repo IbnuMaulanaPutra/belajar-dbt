@@ -18,43 +18,37 @@ general end to end project
 
 # lineage dbt
 raw.product_crawling
-        |
-        v
-raw.src_product_crawling
-        |
-        v
+    |
+    v
 stg_product_crawling
-        |
-        v
+    |
+    v
 int_product_matching_base
-        |
-        v
+    |
+    v
 int_product_matching_fuzzy_candidates
-        |
-        v
+    |
+    v
 int_product_matching_resolved
-        |
-        +----------------------------+
-        |              |             |
-        v              v             v
-dim_product_master  fct_product_price_daily
-dim_platform        ^
-dim_date            |
-                    |
-                    +-- menggunakan hasil
-                        product matching
-
+    |
+    +--> dim_product_master
+    |
+    +--> dim_platform
+    |
+    +--> dim_date
+    |
+    v
 fct_product_price_daily
-        |
-        +---------------------------+
-        |                           |
-        v                           v
-fct_price_recommendation    Reporting Models
-                            |
-                            +-- a_rpt_price_index_by_platform
-                            +-- a_rpt_discount_analysis
-                            +-- a_rpt_price_dispersion
-                            +-- a_rpt_price_change_patterns
+    |
+    +--> fct_price_recommendation
+    |
+    +--> a_rpt_price_index_by_platform
+    |
+    +--> a_rpt_discount_analysis
+    |
+    +--> a_rpt_price_dispersion
+    |
+    +--> a_rpt_price_change_patterns
 # note AI:
 secara general semua tools ini baru saya pakai dan pelajari, seperti pertemuan awal,
 secara general project saya sudah memahami end to end nya, dan secara implementasi masih di bantu AI
