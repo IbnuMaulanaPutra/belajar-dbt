@@ -1,0 +1,114 @@
+
+version: 2
+
+models:
+  - name: dim_product_master
+    description: "dimensi master produk yang sudah dinormalisasi"
+    columns:
+      - name: product_key
+        description: "kunci unik untuk setiap produk"
+        data_tests:
+          - not_null
+          - unique
+
+      - name: product_name
+        data_tests:
+          - not_null
+
+  - name: dim_platform
+    description: "dimensi platform e-commerce"
+    columns:
+      - name: platform_key
+        data_tests:
+          - not_null
+          - unique
+
+      - name: platform_name
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['tokopedia', 'shopee', 'blibli', 'bukalapak', 'lazada','tiktok shop']
+
+  - name: dim_date
+    description: "dimensi kalender"
+    columns:
+      - name: date_key
+        data_tests:
+          - not_null
+          - unique
+
+      - name: full_date
+        data_tests:
+          - not_null
+          - unique
+
+  - name: fct_product_price_daily
+    description: >
+      grain: satu baris per produk, platform, dan tanggal.
+      Harga yang disimpan adalah observasi terakhir pada tanggal tersebut.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - product_key
+              - platform_key
+              - date_key
+    columns:
+      - name: product_key
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_product_master')
+                field: product_key
+
+      - name: platform_key
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_platform')
+                field: platform_key
+
+      - name: date_key
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_date')
+                field: date_key
+
+      - name: price_amount
+        data_tests:
+          - not_null
+
+  - name: fct_price_recommendation
+    description: >
+      rekomendasi harga berdasarkan harga terendah yang teramati
+      pada tanggal observasi terbaru yang tersedia.
+    columns:
+      - name: recommendation_key
+        data_tests:
+          - not_null
+          - unique
+
+      - name: product_key
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_product_master')
+                field: product_key
+
+      - name: platform_key
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_platform')
+                field: platform_key
+
+      - name: recommended_price
+        data_tests:
+          - not_null
